@@ -247,15 +247,15 @@ CATEGORIES.forEach(c=>c.clips=[{t:"Vidéo 1",url:""},{t:"Vidéo 2",url:""},{t:"V
 /* Liens vidéos : "show" = lecteur principal de la catégorie ; "clips" = miniatures, au format ["titre","lien"] */
 const LINKS = {
   mariage:{title:"Showreel Mariage",show:"https://youtube.com/watch?v=lb5f_bHQpJ0",clips:[["Mariage Caro et Vincent", "https://www.youtube.com/watch?v=hnVF5fCbpMw"], ["Mariage Edwin et Marie", "https://www.youtube.com/watch?v=ndkzKohHcDQ"], ["Mariage Charlotte et Michael", "https://www.youtube.com/watch?v=-tyk24wdScs"], ["Mariage Laura et Jeremy", "https://www.youtube.com/watch?v=02xYN0dJeWs"]]},
-  concert:{title:"Roots & Roses Festival",show:"https://www.youtube.com/watch?v=njhuJ6ds71U",clips:[["LL Festival - 1ère Édition", "https://www.youtube.com/watch?v=kZPpII21jto"], ["Vidéo 2", ""], ["Vidéo 3", ""]]},
+  concert:{title:"Roots & Roses Festival",show:"https://www.youtube.com/watch?v=njhuJ6ds71U",clips:[["LL Festival - 1ère Édition", "https://www.youtube.com/watch?v=kZPpII21jto"], ["La Cour Electronique", "https://youtu.be/DlMw_mwTGXY"], ["Vidéo 3", ""]]},
   sport:{title:"Stage avec Jérôme Le Banner",show:"https://www.youtube.com/watch?v=Ygr5RC8xElM",clips:[["1er Gala du Borriello Gym", "https://youtu.be/Ukb2NwX4nVI"], ["Martial Art Festival", "https://www.youtube.com/watch?v=cg_QLuGxUWw"], ["Mike Tyson au LouvExpo", "https://www.youtube.com/watch?v=2329crTZCEM"]]},
   corporate:{title:"Druart",show:"https://vimeo.com/390149636",clips:[["Restaurant Le Val-Fayt", "https://www.youtube.com/watch?v=SN-S8tio0Es"], ["Lackner Construct", "https://youtu.be/AwcaZZr1_hU"], ["Sita Open Days 2025", "https://youtu.be/ax68RGgXhqk"]]},
   culture:{title:"La Semaine du Cinéma au Stuart",show:"https://www.youtube.com/watch?v=DupDLsXKDCU",clips:[["Le Printemps du monde de Pablo Neruda", "https://www.youtube.com/watch?v=aiaxBBycB0w"], ["L'Exposition Moche", "https://youtu.be/swHKQrRBhX4"], ["Musée de Mariemont", "https://www.youtube.com/watch?v=LIABL5Tj2D8"]]},
   cinema:{title:"Showreel Cinéma",show:"https://www.youtube.com/watch?v=9ICplUnRR7w",clips:[]},
-  music:{title:"Martin Sao Pedro mix for Abstract Live Room",show:"https://www.youtube.com/watch?v=XrrRHY69bhE",clips:[["Globul Mix - Abstract Live Room", "https://www.youtube.com/watch?v=J5IaCcons9s"], ["Milkshake Room - Jay Dunham", "https://www.youtube.com/watch?v=aP7aczI314o"], ["Ferdinand De Marne - Abstract Live Room", "https://www.youtube.com/watch?v=fRyMRXIuQPI"]]},
+  music:{title:"Martin Sao Pedro - Abstract Live Room",show:"https://www.youtube.com/watch?v=XrrRHY69bhE",clips:[["Globul Mix - Abstract Live Room", "https://www.youtube.com/watch?v=J5IaCcons9s"], ["Milkshake Room - Jay Dunham", "https://www.youtube.com/watch?v=aP7aczI314o"], ["Ferdinand De Marne - Abstract Live Room", "https://www.youtube.com/watch?v=fRyMRXIuQPI"]]},
   clips:{title:"Manon Hansay - Impeccable",show:"https://youtu.be/WH-VFETu9BE",clips:[["The Devil's Barker - The Carpenters", "https://vimeo.com/865982410"], ["Giac Taylor - Hungry for Love", "https://www.youtube.com/watch?v=05WD6_RxJU0"], ["Fred and the Healers - Lonesome light", "https://www.youtube.com/watch?v=W_SuB22Mm0o"]]},
   events:{title:"Aperitivo - Aftermovie",show:"https://vimeo.com/759961205",clips:[["Mike Tyson à LouvExpo", "https://youtu.be/2329crTZCEM"], ["We Love The 2000's - Part 3", "https://vimeo.com/715124904"], ["Grande dégustation Sita", "https://vimeo.com/659031566"]]},
-  documentaires:{title:"Le Musée royal de Mariemont s’habille d’un nouveau logo !",show:"https://www.youtube.com/watch?v=5GxjqObGTAM",clips:[["Des échanges et des dieux qui changent", "https://www.youtube.com/watch?v=NMBfE7My93U"], ["La Chine au féminin. Une aventure moderne.", "https://www.youtube.com/watch?v=0miqsdHJS1o"], ["Visite virtuelle : Femmes guerrières Femmes remarquables / La Chine au féminin. Une aventure moderne", "https://www.youtube.com/watch?v=G3dPgGZGu2Q"]]},
+  documentaires:{title:"Le Musée royal de Mariemont s’habille d’un nouveau logo !",show:"https://www.youtube.com/watch?v=5GxjqObGTAM",clips:[["Des échanges et des dieux qui changent", "https://www.youtube.com/watch?v=NMBfE7My93U"], ["La Chine au féminin. Une aventure moderne.", "https://www.youtube.com/watch?v=TttxYhjlSDE"], ["Visite virtuelle : Femmes guerrières Femmes remarquables / La Chine au féminin. Une aventure moderne", "https://www.youtube.com/watch?v=G3dPgGZGu2Q"]]},
   papa:{title:"Star Wars - HanDrea Solo contre attaque",show:"https://youtu.be/JWBkvQNzAhw",clips:[["Star Wars - HanDrea Solo contre attaque", "https://youtu.be/JWBkvQNzAhw"], ["Papa, il y a un tueur dans mon placard", "https://youtu.be/D1pnHlStxIA"], ["Washing Gun", "https://youtu.be/VKgsZwlwbRE"]]}
 };
 Object.entries(LINKS).forEach(([id,o])=>{
@@ -276,11 +276,25 @@ function toEmbed(u){
   const v = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
   return v ? "https://player.vimeo.com/video/"+v[1] : u;
 }
+function posterFallback(img){
+  const next = (img.dataset.fb || "").split(",").filter(Boolean);
+  if(!next.length){ img.remove(); return; }
+  img.src = next.shift();
+  img.dataset.fb = next.join(",");
+}
 function poster(u,q){
   const m = (u||"").match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
   const v = (u||"").match(/vimeo\.com\/(?:video\/)?(\d+)/);
-  const src = m ? `https://i.ytimg.com/vi/${m[1]}/${q}default.jpg` : v ? `https://vumbnail.com/${v[1]}.jpg` : "";
-  return src ? `<img class="poster" src="${src}" alt="" loading="lazy" onerror="this.remove()">` : "";
+  let src = "", fb = [];
+  if(m){
+    const b = "https://i.ytimg.com/vi/"+m[1]+"/";
+    src = b+"maxresdefault.jpg";
+    fb = [b+"sddefault.jpg", b+"hqdefault.jpg"];
+  } else if(v){
+    src = "https://vumbnail.com/"+v[1]+"_large.jpg";
+    fb = ["https://vumbnail.com/"+v[1]+".jpg"];
+  }
+  return src ? `<img class="poster" src="${src}" data-fb="${fb.join(",")}" alt="" loading="lazy" onerror="posterFallback(this)">` : "";
 }
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 function video(url,label,cap,title){
@@ -381,7 +395,7 @@ document.addEventListener("click",e=>{
   const b = e.target.closest(".play[data-src]");
   if(!b) return;
   const box = b.parentElement;
-  box.innerHTML = `<iframe src="${b.dataset.src}?autoplay=1" title="${b.dataset.t}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  box.innerHTML = `<iframe src="${b.dataset.src}?${/vimeo/.test(b.dataset.src) ? "autoplay=1&title=0&byline=0&portrait=0&color=ffffff&dnt=1" : "autoplay=1&rel=0&modestbranding=1&iv_load_policy=3&color=white&playsinline=1"}" title="${b.dataset.t}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
   void box.offsetWidth;
   box.classList.add("playing");
 });
