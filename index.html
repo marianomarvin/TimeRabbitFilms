@@ -73,12 +73,15 @@ main{min-height:70vh}
 .swap>*{grid-area:1/1;transition:opacity .2s}
 .pswap{display:grid;width:100%;height:100%}
 .pswap>*{grid-area:1/1;transition:opacity .2s}
-.pswap svg{width:75%;height:75%;place-self:center;box-sizing:border-box;padding:1.28rem 1.2rem 1.28rem 1.42rem;background:var(--white);color:var(--red);border-radius:50%;opacity:0;margin:0;transform:scale(1.3333);transition:opacity .2s,transform .35s ease}
+.play>img,.play .pswap img{width:90%;height:90%;place-self:center}
+.pswap svg{width:67.5%;height:67.5%;place-self:center;box-sizing:border-box;padding:1.15rem 1.08rem 1.15rem 1.28rem;background:var(--white);color:var(--red);border-radius:50%;opacity:0;margin:0;transform:scale(1.3333);transition:opacity .25s ease-in-out,transform 0s linear .25s}
 .video:hover .pswap img,.play:focus-visible .pswap img{opacity:0}
-.video:hover .pswap svg,.play:focus-visible .pswap svg{opacity:1;transform:scale(1)}
-.vtitle{position:absolute;left:50%;top:calc(50% + 3.5rem);transform:translateX(-50%);z-index:3;max-width:calc(100% - 2rem);padding:.35rem .9rem .35rem calc(.9rem + .05em);background:var(--red);color:var(--white);font-size:.95rem;line-height:1.3;text-align:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
-.video:hover .vtitle,.play:focus-visible ~ .vtitle{opacity:1}
-@media(prefers-reduced-motion:reduce){.pswap>*,.pswap svg,.vtitle{transition:none}}
+.video:hover .pswap svg,.play:focus-visible .pswap svg{opacity:1;transform:scale(1);transition:opacity .2s,transform .35s ease}
+.pswap>img{transition:opacity .25s ease-in-out,transform .35s ease-in-out .25s}
+.video:hover .pswap img,.play:focus-visible .pswap img{transform:scale(.75);transition:opacity .2s,transform 0s linear .2s}
+.vtitle{position:absolute;left:50%;top:calc(50% + 3.5rem);transform:translateX(-50%);z-index:3;max-width:calc(100% - 2rem);padding:.35rem .9rem .35rem calc(.9rem + .05em);background:var(--red);color:var(--white);font-size:.95rem;line-height:1.3;text-align:center;opacity:0;pointer-events:none;transition:opacity .5s ease-in-out}
+.video:hover .vtitle,.play:focus-visible ~ .vtitle{opacity:1;transition:opacity .3s ease}
+@media(prefers-reduced-motion:reduce){.pswap>*,.pswap svg,.pswap>img,.video:hover .pswap img,.video:hover .pswap svg,.vtitle,.video:hover .vtitle{transition:none}}
 .thumb-eye{width:1.9rem;height:1.9rem;display:block}
 .thumb .swap svg{opacity:0}
 .thumb:hover .thumb-eye,.thumb:focus-visible .thumb-eye{opacity:0}
@@ -244,14 +247,15 @@ CATEGORIES.forEach(c=>c.clips=[{t:"Vidéo 1",url:""},{t:"Vidéo 2",url:""},{t:"V
 /* Liens vidéos : "show" = lecteur principal de la catégorie ; "clips" = miniatures, au format ["titre","lien"] */
 const LINKS = {
   mariage:{title:"Showreel Mariage",show:"https://youtube.com/watch?v=lb5f_bHQpJ0",clips:[["Mariage Caro et Vincent", "https://www.youtube.com/watch?v=hnVF5fCbpMw"], ["Mariage Edwin et Marie", "https://www.youtube.com/watch?v=ndkzKohHcDQ"], ["Mariage Charlotte et Michael", "https://www.youtube.com/watch?v=-tyk24wdScs"], ["Mariage Laura et Jeremy", "https://www.youtube.com/watch?v=02xYN0dJeWs"]]},
+  concert:{title:"Roots & Roses Festival",show:"https://www.youtube.com/watch?v=njhuJ6ds71U",clips:[["LL Festival - 1ère Édition", "https://www.youtube.com/watch?v=kZPpII21jto"], ["Vidéo 2", ""], ["Vidéo 3", ""]]},
   sport:{title:"Stage avec Jérôme Le Banner",show:"https://www.youtube.com/watch?v=Ygr5RC8xElM",clips:[["1er Gala du Borriello Gym", "https://youtu.be/Ukb2NwX4nVI"], ["Martial Art Festival", "https://www.youtube.com/watch?v=cg_QLuGxUWw"], ["Mike Tyson au LouvExpo", "https://www.youtube.com/watch?v=2329crTZCEM"]]},
   corporate:{title:"Druart",show:"https://vimeo.com/390149636",clips:[["Restaurant Le Val-Fayt", "https://www.youtube.com/watch?v=SN-S8tio0Es"], ["Lackner Construct", "https://youtu.be/AwcaZZr1_hU"], ["Sita Open Days 2025", "https://youtu.be/ax68RGgXhqk"]]},
   culture:{title:"La Semaine du Cinéma au Stuart",show:"https://www.youtube.com/watch?v=DupDLsXKDCU",clips:[["Le Printemps du monde de Pablo Neruda", "https://www.youtube.com/watch?v=aiaxBBycB0w"], ["L'Exposition Moche", "https://youtu.be/swHKQrRBhX4"], ["Musée de Mariemont", "https://www.youtube.com/watch?v=LIABL5Tj2D8"]]},
   cinema:{title:"Showreel Cinéma",show:"https://www.youtube.com/watch?v=9ICplUnRR7w",clips:[]},
-  music:{title:"Martin Sao Pedro mix for Abstract Live Room",show:"https://www.youtube.com/watch?v=XrrRHY69bhE",clips:[["Globul mix for Abstract Live Room", "https://www.youtube.com/watch?v=J5IaCcons9s"], ["Milkshake Room - Jay Dunham", "https://www.youtube.com/watch?v=aP7aczI314o"], ["Ferdinand De Marne mix for Abstract Live Room", "https://www.youtube.com/watch?v=fRyMRXIuQPI"]]},
-  clips:{title:"Manon Hansay : Impeccable",show:"https://vimeo.com/757635903",clips:[["The Devil's Barker - The Carpenters", "https://vimeo.com/865982410"], ["Giac Taylor - Hungry for Love", "https://www.youtube.com/watch?v=05WD6_RxJU0"], ["Fred and the Healers - Lonesome light", "https://www.youtube.com/watch?v=W_SuB22Mm0o"]]},
-  events:{title:"Aperitivo - Aftermovie",show:"https://vimeo.com/759961205",clips:[["Mike Tyson à LouvExpo", "https://youtu.be/2329crTZCEM"], ["We love the 2000 Part 3", "https://vimeo.com/715124904"], ["Grande dégustation Sita", "https://vimeo.com/659031566"]]},
-  documentaires:{title:"Le Musée royal de Mariemont s’habille d’un nouveau logo !",show:"https://www.youtube.com/watch?v=5GxjqObGTAM",clips:[["Visite virtuelle / Nicolas Amoroso « Des échanges et des dieux qui changent »", "https://www.youtube.com/watch?v=NMBfE7My93U"], ["Visite virtuelle : Devenir femme / La Chine au féminin. Une aventure moderne", "https://www.youtube.com/watch?v=0miqsdHJS1o"], ["Visite virtuelle : Femmes guerrières Femmes remarquables / La Chine au féminin. Une aventure moderne", "https://www.youtube.com/watch?v=G3dPgGZGu2Q"]]},
+  music:{title:"Martin Sao Pedro mix for Abstract Live Room",show:"https://www.youtube.com/watch?v=XrrRHY69bhE",clips:[["Globul Mix - Abstract Live Room", "https://www.youtube.com/watch?v=J5IaCcons9s"], ["Milkshake Room - Jay Dunham", "https://www.youtube.com/watch?v=aP7aczI314o"], ["Ferdinand De Marne - Abstract Live Room", "https://www.youtube.com/watch?v=fRyMRXIuQPI"]]},
+  clips:{title:"Manon Hansay - Impeccable",show:"https://youtu.be/WH-VFETu9BE",clips:[["The Devil's Barker - The Carpenters", "https://vimeo.com/865982410"], ["Giac Taylor - Hungry for Love", "https://www.youtube.com/watch?v=05WD6_RxJU0"], ["Fred and the Healers - Lonesome light", "https://www.youtube.com/watch?v=W_SuB22Mm0o"]]},
+  events:{title:"Aperitivo - Aftermovie",show:"https://vimeo.com/759961205",clips:[["Mike Tyson à LouvExpo", "https://youtu.be/2329crTZCEM"], ["We Love The 2000's - Part 3", "https://vimeo.com/715124904"], ["Grande dégustation Sita", "https://vimeo.com/659031566"]]},
+  documentaires:{title:"Le Musée royal de Mariemont s’habille d’un nouveau logo !",show:"https://www.youtube.com/watch?v=5GxjqObGTAM",clips:[["Des échanges et des dieux qui changent", "https://www.youtube.com/watch?v=NMBfE7My93U"], ["La Chine au féminin. Une aventure moderne.", "https://www.youtube.com/watch?v=0miqsdHJS1o"], ["Visite virtuelle : Femmes guerrières Femmes remarquables / La Chine au féminin. Une aventure moderne", "https://www.youtube.com/watch?v=G3dPgGZGu2Q"]]},
   papa:{title:"Star Wars - HanDrea Solo contre attaque",show:"https://youtu.be/JWBkvQNzAhw",clips:[["Star Wars - HanDrea Solo contre attaque", "https://youtu.be/JWBkvQNzAhw"], ["Papa, il y a un tueur dans mon placard", "https://youtu.be/D1pnHlStxIA"], ["Washing Gun", "https://youtu.be/VKgsZwlwbRE"]]}
 };
 Object.entries(LINKS).forEach(([id,o])=>{
