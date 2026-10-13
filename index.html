@@ -277,6 +277,7 @@ function toEmbed(u){
   const v = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
   return v ? "https://player.vimeo.com/video/"+v[1] : u;
 }
+function posterCheck(img){ if(img.naturalWidth && img.naturalWidth <= 120) posterFallback(img); }
 function posterFallback(img){
   const next = (img.dataset.fb || "").split(",").filter(Boolean);
   if(!next.length){ img.remove(); return; }
@@ -290,12 +291,12 @@ function poster(u,q){
   if(m){
     const b = "https://i.ytimg.com/vi/"+m[1]+"/";
     src = b+"maxresdefault.jpg";
-    fb = [b+"sddefault.jpg", b+"hqdefault.jpg"];
+    fb = [b+"sddefault.jpg", b+"hqdefault.jpg", b+"mqdefault.jpg", b+"0.jpg"];
   } else if(v){
     src = "https://vumbnail.com/"+v[1]+"_large.jpg";
     fb = ["https://vumbnail.com/"+v[1]+".jpg"];
   }
-  return src ? `<img class="poster" src="${src}" data-fb="${fb.join(",")}" alt="" loading="lazy" onerror="posterFallback(this)">` : "";
+  return src ? `<img class="poster" src="${src}" data-fb="${fb.join(",")}" alt="" loading="lazy" onload="posterCheck(this)" onerror="posterFallback(this)">` : "";
 }
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 function video(url,label,cap,title){
