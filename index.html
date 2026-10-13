@@ -200,6 +200,7 @@ h2{font-size:clamp(1.8rem,4.5vw,2.8rem)}
   <nav id="nav" aria-label="Navigation principale">
     <a href="#/" data-p="home">Showreel</a>
     <a href="#/portfolio" data-p="portfolio">Réalisations</a>
+    <a href="#/presse" data-p="presse">Presse</a>
     <a href="#/photos" data-p="photos">Photos</a>
     <a href="#/presentation" data-p="presentation">Présentation</a>
     <a href="#/contact" data-p="contact">Contact</a>
@@ -239,7 +240,7 @@ const CATEGORIES = [
   {id:"clips",name:"Clips",url:"",txt:"Clips musicaux avec une vraie direction visuelle, pensés avec l'artiste."},
   {id:"events",name:"Events",url:"",txt:"Soirées, conférences et lancements : le récap vidéo de votre événement."},
   {id:"documentaires",name:"Documentaires",url:"",txt:"Des histoires vraies, des personnes et des lieux racontés avec du temps et de l'attention."},
-  {id:"presse",name:"Presse",noCta:true,url:"",txt:"Reportages, interviews et sujets d'actualité, tournés et montés pour les médias et la presse."},
+  {id:"presse",name:"Presse",own:true,noCta:true,url:"",txt:"Reportages, interviews et sujets d'actualité, tournés et montés pour les médias et la presse."},
   {id:"papa",name:"Papa, On peut faire un film",hideHome:true,cta:{label:"Suivre nos aventures sur Instagram",href:"https://www.instagram.com/papaonpeutfaireunfilm/"},url:"",txt:"Une petite plongée dans mon espace geek personnel : le partage d'une passion entre un père et un fils."}
 ];
 /* 3 vidéos par catégorie : remplacez le titre (t) et le lien (url) de chaque miniature */
@@ -247,7 +248,7 @@ CATEGORIES.forEach(c=>c.clips=[{t:"Vidéo 1",url:""},{t:"Vidéo 2",url:""},{t:"V
 /* Liens vidéos : "show" = lecteur principal de la catégorie ; "clips" = miniatures, au format ["titre","lien"] */
 const LINKS = {
   mariage:{title:"Showreel Mariage",show:"https://youtube.com/watch?v=lb5f_bHQpJ0",clips:[["Mariage Caro et Vincent", "https://www.youtube.com/watch?v=hnVF5fCbpMw"], ["Mariage Edwin et Marie", "https://www.youtube.com/watch?v=ndkzKohHcDQ"], ["Mariage Charlotte et Michael", "https://www.youtube.com/watch?v=-tyk24wdScs"], ["Mariage Laura et Jeremy", "https://www.youtube.com/watch?v=02xYN0dJeWs"]]},
-  presse:{title:"Projection du documentaire Meeting Mike",show:"https://youtu.be/yu-F7-1Z4yM",clips:[["Projection du documentaire Meeting Mike", "https://youtu.be/yu-F7-1Z4yM"], ["Vidéo 2", ""], ["Vidéo 3", ""]]},
+  presse:{title:"Projection du documentaire Meeting Mike",show:"https://youtu.be/yu-F7-1Z4yM",clips:[["Projection du documentaire Meeting Mike", "https://youtu.be/yu-F7-1Z4yM"], ["ACTV - Tournage du documentaire Meeting Mike à La Louvière", "https://youtu.be/QIYnExiSotQ"], ["Silence en Coulisses - Marvin Mariano", "https://youtu.be/hq-LMJrPHjg"]]},
   concert:{title:"Roots & Roses Festival",show:"https://www.youtube.com/watch?v=njhuJ6ds71U",clips:[["LL Festival - 1ère Édition", "https://www.youtube.com/watch?v=kZPpII21jto"], ["La Cour Electronique", "https://youtu.be/DlMw_mwTGXY"], ["We love the 2000's", "https://www.youtube.com/watch?v=5fI7VYk4AsY"]]},
   sport:{title:"Stage avec Jérôme Le Banner",show:"https://www.youtube.com/watch?v=Ygr5RC8xElM",clips:[["1er Gala du Borriello Gym", "https://youtu.be/Ukb2NwX4nVI"], ["Martial Art Festival", "https://www.youtube.com/watch?v=cg_QLuGxUWw"], ["Borriello Boxing Night 3", "https://www.youtube.com/watch?v=EXkZBRXKSY8&t=179s"]]},
   corporate:{title:"Druart",show:"https://www.youtube.com/watch?v=F5oh_rkKeik",clips:[["Restaurant Le Val-Fayt", "https://www.youtube.com/watch?v=SN-S8tio0Es"], ["Lackner Construct", "https://youtu.be/AwcaZZr1_hU"], ["Sita Open Days 2025", "https://youtu.be/ax68RGgXhqk"]]},
@@ -311,16 +312,16 @@ function home(){
   return `<section class="hero"><div><h1>TIME RABBIT<span>Films</span></h1>
   <p><strong class="who">Robby Pepe</strong><br>Réalisateur.<br>Vidéaste pour vos mariages, concerts, vos évènements en sport, entreprises, culture, cinéma ou autre, en Belgique ou dans le nord de la France.</p></div><img src="${LOGO}" alt="Logo Time Rabbit Video Productions"></section>
   <section class="reel">${video(GENERAL,"Showreel général",'<h2 class="reel-title">Showreel 2026</h2>',GENERAL_TITLE)}
-  <div class="cats" role="list">${CATEGORIES.filter(c=>!c.hideHome&&!c.hidden).map(c=>`<a role="listitem" href="#/portfolio/${c.id}">${c.name}<i class="eyebox"><img class="eye" src="${EYE}" alt="" width="26" height="26"></i></a>`).join("")}</div></section>
+  <div class="cats" role="list">${CATEGORIES.filter(c=>!c.hideHome&&!c.hidden&&!c.own).map(c=>`<a role="listitem" href="#/portfolio/${c.id}">${c.name}<i class="eyebox"><img class="eye" src="${EYE}" alt="" width="26" height="26"></i></a>`).join("")}</div></section>
   <div class="wrap"><a class="cta" href="#/contact">Parlons de votre projet</a></div>`;
 }
 
-function portfolio(id){
-  const VIS = CATEGORIES.filter(c=>!c.hidden);
-  const cur = VIS.find(c=>c.id===id) || VIS[0];
-  return `<div class="wrap"><h2>Réalisations</h2><hr class="rule">
+function portfolio(id,solo){
+  const VIS = CATEGORIES.filter(c=>!c.hidden&&!c.own);
+  const cur = solo ? CATEGORIES.find(c=>c.id===id) : (VIS.find(c=>c.id===id) || VIS[0]);
+  return `<div class="wrap"><h2>${solo ? cur.name : "Réalisations"}</h2><hr class="rule">${solo ? "" : `
   <div class="tabs">${VIS.map(c=>`<a href="#/portfolio/${c.id}" ${c.id===cur.id?'aria-current="page"':''}>${c.name}</a>`).join("")}</div>
-  <h3 style="font-size:1.6rem;margin-bottom:1rem">${cur.name}</h3>
+  <h3 style="font-size:1.6rem;margin-bottom:1rem">${cur.name}</h3>`}
   <div id="player">${video(cur.url,"Showreel "+cur.name,"",cur.title)}</div>
   ${cur.noThumbs ? "" : `<button class="back" id="back" data-c="${cur.id}">← Revenir au showreel ${cur.name}</button>
   <div class="thumbs" style="grid-template-columns:repeat(${cur.clips.length},1fr)" role="group" aria-label="Autres vidéos ${cur.name}">${cur.clips.map((k,i)=>`<button class="thumb" aria-pressed="false" data-c="${cur.id}" data-i="${i}" aria-label="Lire : ${k.t}">${poster(k.url,"mq")}<i class="swap"><img class="thumb-eye" src="${EYE}" alt="">${PLAY}</i><span>${k.t}</span></button>`).join("")}</div>`}
@@ -362,7 +363,8 @@ function route(){
   const [page,arg] = path.split("/");
   const p = page||"home";
   let html;
-  if(p==="portfolio") html = portfolio(arg);
+  if(p==="presse" || (p==="portfolio" && arg==="presse")) html = portfolio("presse",true);
+  else if(p==="portfolio") html = portfolio(arg);
   else if(p==="photos") html = photos();
   else if(p==="presentation") html = presentation();
   else if(p==="contact") html = contact(new URLSearchParams(qs||"").get("s"));
