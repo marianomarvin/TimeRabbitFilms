@@ -88,6 +88,9 @@ main{min-height:70vh}
 .thumb:hover .swap svg,.thumb:focus-visible .swap svg{opacity:1}
 @media(prefers-reduced-motion:reduce){.swap>*{transition:none}}
 .ytl{margin:.5rem 0 0;font-size:.85rem;color:var(--grey)}.ytl a{color:var(--white)}
+.reel>.ytl{padding-bottom:calc(2rem + .24rem)}
+.wrap:has(.thumbs) #player .ytl{padding-bottom:calc(.8rem + .24rem)}
+.wrap:not(:has(.thumbs)) #player .ytl{padding-bottom:calc(1.5rem + .24rem)}
 .reel-title{margin:1rem 0 .2rem;font-size:clamp(1.3rem,3vw,1.8rem)}
 .reel{padding:0 clamp(1rem,4vw,3rem);max-width:1200px;margin:0 auto}
 h2{font-size:clamp(2rem,5vw,3.4rem)}
@@ -200,9 +203,9 @@ h2{font-size:clamp(1.8rem,4.5vw,2.8rem)}
   <nav id="nav" aria-label="Navigation principale">
     <a href="#/" data-p="home">Showreel</a>
     <a href="#/portfolio" data-p="portfolio">Réalisations</a>
-    <a href="#/presse" data-p="presse">Presse</a>
-    <a href="#/photos" data-p="photos">Photos</a>
     <a href="#/presentation" data-p="presentation">Présentation</a>
+    <a href="#/photos" data-p="photos">Photos</a>
+    <a href="#/presse" data-p="presse">Presse</a>
     <a href="#/contact" data-p="contact">Contact</a>
   </nav>
 </header>
@@ -230,16 +233,16 @@ const EMAIL = "robby_pepe@msn.com";
 const GENERAL = "https://www.youtube.com/watch?v=UZXNVvkT7Ug";
 const CATEGORIES = [
   {id:"mariage",name:"Mariage",url:"",txt:"Des films de mariage qui préservent l'émotion du jour J : Un souvenir qui perdure des préparatifs à la pièce montée."},
-  {id:"concert",name:"Concert",url:"",txt:"La scène, le son et la foule, filmés au plus près de l'énergie du live."},
+  {id:"concert",name:"Concert",url:"",txt:"Retranscrire l'énergie du live, des artistes et du public."},
   {id:"sport",name:"Sport",url:"",txt:"Compétitions, entraînements et portraits d'athlètes, en plans dynamiques."},
-  {id:"corporate",name:"Corporate",url:"",txt:"Films d'entreprise, interviews et vidéos de marque pour présenter vos équipes et vos services."},
-  {id:"culture",name:"Culture",url:"",txt:"Expositions, festivals et institutions : la création artistique mise en images."},
+  {id:"corporate",name:"Corporate",url:"",txt:"Films d'entreprise, interviews et vidéos de marque pour présenter vos services et vos équipes."},
+  {id:"culture",name:"Culture",url:"",txt:"Des créations vidéo pour promouvoir vos spectacles, vos évènements, vos expositions..."},
   {id:"theatre",name:"Théâtre",hidden:true,url:"",txt:"Captations et teasers de spectacles, au service des compagnies et des salles."},
-  {id:"cinema",name:"Cinéma",noThumbs:true,url:"",txt:"Courts métrages, fictions et projets cinématographiques, de l'écriture à l'étalonnage."},
-  {id:"music",name:"Music Live",url:"",txt:"Sessions live, captations studio et contenus pour artistes."},
-  {id:"clips",name:"Clips",url:"",txt:"Clips musicaux avec une vraie direction visuelle, pensés avec l'artiste."},
-  {id:"events",name:"Events",url:"",txt:"Soirées, conférences et lancements : le récap vidéo de votre événement."},
-  {id:"documentaires",name:"Documentaires",url:"",txt:"Des histoires vraies, des personnes et des lieux racontés avec du temps et de l'attention."},
+  {id:"cinema",name:"Cinéma",noThumbs:true,url:"",txt:"Des courts métrages, fictions et des projets cinématographiques, de l'écriture à l'étalonnage."},
+  {id:"music",name:"Music Live",url:"",txt:"Sessions live, captations studio et contenus pour artistes musicaux."},
+  {id:"clips",name:"Clips",url:"",txt:"Des clips musicaux pour mettre en valeur et en image votre musique."},
+  {id:"events",name:"Events",url:"",txt:"Événements, soirées, conférences et lancements : le récap vidéo de votre événement."},
+  {id:"documentaires",name:"Documentaires",url:"",txt:"Des histoires vraies, de la plus grande à la plus méconnue, des personnes et des lieux racontés avec le temps et l'attention nécessaires."},
   {id:"presse",name:"Presse",own:true,noCta:true,url:"",txt:"Reportages, interviews et sujets d'actualité, tournés et montés pour les médias et la presse."},
   {id:"papa",name:"Papa, On peut faire un film",hideHome:true,cta:{label:"Suivre nos aventures sur Instagram",href:"https://www.instagram.com/papaonpeutfaireunfilm/"},url:"",txt:"Une petite plongée dans mon espace geek personnel : le partage d'une passion entre un père et un fils."}
 ];
@@ -248,7 +251,7 @@ CATEGORIES.forEach(c=>c.clips=[{t:"Vidéo 1",url:""},{t:"Vidéo 2",url:""},{t:"V
 /* Liens vidéos : "show" = lecteur principal de la catégorie ; "clips" = miniatures, au format ["titre","lien"] */
 const LINKS = {
   mariage:{title:"Showreel Mariage",show:"https://youtube.com/watch?v=lb5f_bHQpJ0",clips:[["Mariage Caro et Vincent", "https://www.youtube.com/watch?v=hnVF5fCbpMw"], ["Mariage Edwin et Marie", "https://www.youtube.com/watch?v=ndkzKohHcDQ"], ["Mariage Charlotte et Michael", "https://www.youtube.com/watch?v=-tyk24wdScs"], ["Mariage Laura et Jeremy", "https://www.youtube.com/watch?v=02xYN0dJeWs"]]},
-  presse:{title:"Projection du documentaire Meeting Mike",show:"https://youtu.be/yu-F7-1Z4yM",clips:[["Projection du documentaire Meeting Mike", "https://youtu.be/yu-F7-1Z4yM"], ["ACTV - Tournage du documentaire Meeting Mike à La Louvière", "https://youtu.be/QIYnExiSotQ"], ["Silence en Coulisses - Marvin Mariano", "https://youtu.be/hq-LMJrPHjg"]]},
+  presse:{title:"ACTV - Projection du documentaire Meeting Mike",show:"https://youtu.be/yu-F7-1Z4yM",clips:[["ACTV - Projection du documentaire Meeting Mike", "https://youtu.be/yu-F7-1Z4yM"], ["ACTV - Tournage du documentaire Meeting Mike à La Louvière", "https://youtu.be/QIYnExiSotQ"], ["ACTV - Silence en Coulisses - Marvin Mariano", "https://youtu.be/hq-LMJrPHjg"]]},
   concert:{title:"Roots & Roses Festival",show:"https://www.youtube.com/watch?v=njhuJ6ds71U",clips:[["LL Festival - 1ère Édition", "https://www.youtube.com/watch?v=kZPpII21jto"], ["La Cour Electronique", "https://youtu.be/DlMw_mwTGXY"], ["We love the 2000's", "https://www.youtube.com/watch?v=5fI7VYk4AsY"]]},
   sport:{title:"Stage avec Jérôme Le Banner",show:"https://www.youtube.com/watch?v=Ygr5RC8xElM",clips:[["1er Gala du Borriello Gym", "https://youtu.be/Ukb2NwX4nVI"], ["Martial Art Festival", "https://www.youtube.com/watch?v=cg_QLuGxUWw"], ["Borriello Boxing Night 3", "https://www.youtube.com/watch?v=EXkZBRXKSY8&t=179s"]]},
   corporate:{title:"Druart",show:"https://www.youtube.com/watch?v=F5oh_rkKeik",clips:[["Restaurant Le Val-Fayt", "https://www.youtube.com/watch?v=SN-S8tio0Es"], ["Lackner Construct", "https://youtu.be/AwcaZZr1_hU"], ["Sita Open Days 2025", "https://youtu.be/ax68RGgXhqk"]]},
