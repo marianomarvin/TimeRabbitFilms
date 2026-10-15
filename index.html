@@ -60,7 +60,7 @@ main{min-height:70vh}
 .play,.play:hover{background:none;color:inherit;transform:none;transition:none;padding:0;width:5.5rem;height:5.5rem}
 .play img{width:100%;height:100%;display:block}
 .thumb{transition:border-color .2s,opacity .6s ease}
-.thumb span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-align:center;max-width:calc(100% - .8rem);padding:.3rem .6rem .3rem calc(.6rem + .05em);background:var(--red);color:var(--white);text-shadow:none;font-size:.8rem;line-height:1.3}
+.thumb span{white-space:pre-line;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-align:center;max-width:calc(100% - .8rem);padding:.3rem .6rem .3rem calc(.6rem + .05em);background:var(--red);color:var(--white);text-shadow:none;font-size:.8rem;line-height:1.3}
 @media(max-width:520px){.thumb span{display:none}}
 #player{transition:opacity .6s ease}
 @media(hover:hover){
@@ -79,7 +79,7 @@ main{min-height:70vh}
 .video:hover .pswap svg,.play:focus-visible .pswap svg{opacity:1;transform:scale(1);transition:opacity .2s,transform .35s ease}
 .pswap>img{transition:opacity 0s,transform .35s ease-in-out}
 .video:hover .pswap img,.play:focus-visible .pswap img{transform:scale(.75);transition:opacity .2s,transform 0s linear .2s}
-.vtitle{position:absolute;left:50%;top:calc(50% + 3.5rem);transform:translateX(-50%);z-index:3;max-width:calc(100% - 2rem);padding:.35rem .9rem .35rem calc(.9rem + .05em);background:var(--red);color:var(--white);font-size:.95rem;line-height:1.3;text-align:center;opacity:0;pointer-events:none;transition:opacity .5s ease-in-out}
+.vtitle{white-space:pre-line;position:absolute;left:50%;top:calc(50% + 3.5rem);transform:translateX(-50%);z-index:3;max-width:calc(100% - 2rem);padding:.35rem .9rem .35rem calc(.9rem + .05em);background:var(--red);color:var(--white);font-size:.95rem;line-height:1.3;text-align:center;opacity:0;pointer-events:none;transition:opacity .5s ease-in-out}
 .video:hover .vtitle,.play:focus-visible ~ .vtitle{opacity:1;transition:opacity .3s ease}
 @media(prefers-reduced-motion:reduce){.pswap>*,.pswap svg,.pswap>img,.video:hover .pswap img,.video:hover .pswap svg,.vtitle,.video:hover .vtitle{transition:none}}
 .thumb-eye{width:1.9rem;height:1.9rem;display:block}
@@ -251,7 +251,7 @@ CATEGORIES.forEach(c=>c.clips=[{t:"Vidéo 1",url:""},{t:"Vidéo 2",url:""},{t:"V
 /* Liens vidéos : "show" = lecteur principal de la catégorie ; "clips" = miniatures, au format ["titre","lien"] */
 const LINKS = {
   mariage:{title:"Showreel Mariage",show:"https://youtube.com/watch?v=lb5f_bHQpJ0",clips:[["Mariage Caro et Vincent", "https://www.youtube.com/watch?v=hnVF5fCbpMw"], ["Mariage Edwin et Marie", "https://www.youtube.com/watch?v=ndkzKohHcDQ"], ["Mariage Charlotte et Michael", "https://www.youtube.com/watch?v=-tyk24wdScs"], ["Mariage Laura et Jeremy", "https://www.youtube.com/watch?v=02xYN0dJeWs"]]},
-  presse:{title:"ACTV - Projection du documentaire Meeting Mike",show:"https://youtu.be/yu-F7-1Z4yM",clips:[["ACTV - Projection du documentaire Meeting Mike", "https://youtu.be/yu-F7-1Z4yM"], ["ACTV - Tournage du documentaire Meeting Mike à La Louvière", "https://youtu.be/QIYnExiSotQ"], ["ACTV - Silence en Coulisses - Marvin Mariano", "https://youtu.be/hq-LMJrPHjg"]]},
+  presse:{title:"ACTV - Projection du documentaire\nMeeting Mike",show:"https://youtu.be/yu-F7-1Z4yM",clips:[["ACTV - Projection du documentaire\nMeeting Mike", "https://youtu.be/yu-F7-1Z4yM"], ["ACTV - Tournage du documentaire\nMeeting Mike à La Louvière", "https://youtu.be/QIYnExiSotQ"], ["ACTV - Silence en Coulisses\n- Marvin Mariano", "https://youtu.be/hq-LMJrPHjg"]]},
   concert:{title:"Roots & Roses Festival",show:"https://www.youtube.com/watch?v=njhuJ6ds71U",clips:[["LL Festival - 1ère Édition", "https://www.youtube.com/watch?v=kZPpII21jto"], ["La Cour Electronique", "https://youtu.be/DlMw_mwTGXY"], ["We love the 2000's", "https://www.youtube.com/watch?v=5fI7VYk4AsY"]]},
   sport:{title:"Stage avec Jérôme Le Banner",show:"https://www.youtube.com/watch?v=Ygr5RC8xElM",clips:[["1er Gala du Borriello Gym", "https://youtu.be/Ukb2NwX4nVI"], ["Martial Art Festival", "https://www.youtube.com/watch?v=cg_QLuGxUWw"], ["Borriello Boxing Night 3", "https://www.youtube.com/watch?v=EXkZBRXKSY8&t=179s"]]},
   corporate:{title:"Druart",show:"https://www.youtube.com/watch?v=F5oh_rkKeik",clips:[["Restaurant Le Val-Fayt", "https://www.youtube.com/watch?v=SN-S8tio0Es"], ["Lackner Construct", "https://youtu.be/AwcaZZr1_hU"], ["Sita Open Days 2025", "https://youtu.be/ax68RGgXhqk"]]},
